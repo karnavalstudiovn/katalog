@@ -222,6 +222,14 @@ function openProduct(costume) {
     </div>
   `;
   sheet.querySelector(".close-btn").addEventListener("click", closeProduct);
+  const photoEl = sheet.querySelector(".photo-wrap");
+  if (photoEl) {
+    photoEl.addEventListener("click", () => {
+      if (window.matchMedia("(max-width: 639px)").matches) {
+        closeProduct();
+      }
+    });
+  }
   sheet.querySelector(".stash-btn").addEventListener("click", (e) => {
     toggleStash(costume.id);
     const btn = e.currentTarget;
