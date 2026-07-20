@@ -63,7 +63,7 @@ function rowsToCostumes(rows) {
       size,
       price,
       photo,
-      searchBlob: (name + " " + categoriesRaw + " " + tagsRaw).toLowerCase()
+      searchBlob: (id + " " + name + " " + categoriesRaw + " " + tagsRaw).toLowerCase()
     });
   }
   return costumes;
@@ -91,7 +91,7 @@ const stashList = document.getElementById("stash-list");
 
 const CATEGORIES = [
   "Жіночі", "Чоловічі", "Новорічні", "Геловін", "Весняні", "Осінні",
-  "Звірята", "Українські", "Національності", "Професії", "Вечірні", "Аксесуари"
+  "Звірята", "Українські", "Національності", "Професії", "Вечірні", "Аксесуари", "Персонажі"
 ];
 
 // ======================= INIT =======================
@@ -103,6 +103,7 @@ async function init() {
   setupSearch();
   setupOverlayClose();
   setupStashUI();
+  setupScrollTop();
   updateStashCount();
 
   try {
@@ -372,6 +373,36 @@ function openStashPanel() {
     });
   }
   stashPanel.classList.add("open");
+}
+
+// ======================= SCROLL TO TOP (mobile bar under header) =======================
+function setupScrollTop() {
+  const btn = document.getElementById("scroll-top-btn");
+  const header = document.querySelector(".site-header");
+  if (!btn || !header) return;
+
+  function positionBtn() {
+    btn.style.top = header.getBoundingClientRect().height + "px";
+  }
+
+  function toggleVisibility() {
+    if (window.scrollY > 300) btn.classList.add("visible");
+    else btn.classList.remove("visible");
+  }
+
+  positionBtn();
+  toggleVisibility();
+
+  window.addEventListener("scroll", toggleVisibility, { passive: true });
+  window.addEventListener("resize", positionBtn);
+  window.addEventListener("load", positionBtn);
+  if (window.ResizeObserver) {
+    new ResizeObserver(positionBtn).observe(header);
+  }
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
 // ======================= HEADER ICONS + PHONE MODAL =======================
