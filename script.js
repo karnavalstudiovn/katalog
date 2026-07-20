@@ -381,12 +381,14 @@ function setupScrollTop() {
   const header = document.querySelector(".site-header");
   if (!btn || !header) return;
 
+  const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
+
   function positionBtn() {
     btn.style.top = header.getBoundingClientRect().height + "px";
   }
 
   function toggleVisibility() {
-    if (window.scrollY > 300) btn.classList.add("visible");
+    if (isMobile() && window.scrollY > 300) btn.classList.add("visible");
     else btn.classList.remove("visible");
   }
 
@@ -394,7 +396,7 @@ function setupScrollTop() {
   toggleVisibility();
 
   window.addEventListener("scroll", toggleVisibility, { passive: true });
-  window.addEventListener("resize", positionBtn);
+  window.addEventListener("resize", () => { positionBtn(); toggleVisibility(); });
   window.addEventListener("load", positionBtn);
   if (window.ResizeObserver) {
     new ResizeObserver(positionBtn).observe(header);
