@@ -124,7 +124,7 @@ button { font-family: inherit; cursor: pointer; }
   padding: 8px 0;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
-.scroll-top-btn svg { width: 52px; height: 26px; }
+.scroll-top-btn svg { width: 120px; height: 26px; stroke-width: 2.6; }
 .scroll-top-btn.visible { display: flex; }
 .scroll-top-btn:active { background: var(--accent-dark); }
 
