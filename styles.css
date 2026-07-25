@@ -99,8 +99,11 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 640px) {
   .site-header { flex-wrap: wrap; }
   .logo-wrap { order: 1; }
-  .header-icons { order: 2; margin-left: auto; }
+  .header-icons { order: 2; margin-left: auto; gap: 4px; }
   .search-form { order: 3; flex-basis: 100%; }
+  .icon-btn { width: 28px; height: 28px; }
+  .icon-btn img { width: 28px; height: 28px; }
+  .icon-btn svg { width: 14px; height: 14px; }
 }
 
 /* ---------- Scroll to top bar (mobile) ---------- */
