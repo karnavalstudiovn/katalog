@@ -111,7 +111,6 @@ button { font-family: inherit; cursor: pointer; }
   display: none;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   position: fixed;
   left: 0;
   right: 0;
@@ -122,12 +121,10 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--accent);
   color: #fff;
   font-family: inherit;
-  font-weight: 700;
-  font-size: 13px;
-  padding: 10px 0;
+  padding: 8px 0;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
-.scroll-top-btn svg { width: 16px; height: 16px; }
+.scroll-top-btn svg { width: 26px; height: 26px; }
 .scroll-top-btn.visible { display: flex; }
 .scroll-top-btn:active { background: var(--accent-dark); }
 
