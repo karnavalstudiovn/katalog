@@ -155,7 +155,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 @media (max-width: 480px) {
-  .category-nav { justify-content: flex-start; gap: 6px; padding: 10px 12px; }
+  .category-nav { justify-content: center; gap: 6px; padding: 10px 12px; }
   .category-pill { padding: 6px 11px; font-size: 12px; }
 }
 .category-pill.active {
