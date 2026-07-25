@@ -84,8 +84,8 @@ button { font-family: inherit; cursor: pointer; }
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1.5px solid var(--accent);
-  background: #fff;
+  border: none;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +93,7 @@ button { font-family: inherit; cursor: pointer; }
   flex: 0 0 auto;
 }
 .icon-btn svg { width: 17px; height: 17px; }
-.icon-btn img { width: 17px; height: 17px; object-fit: contain; display: block; }
+.icon-btn img { width: 36px; height: 36px; object-fit: contain; display: block; }
 .icon-btn:active { background: var(--accent); color: #fff; }
 
 @media (max-width: 640px) {
