@@ -73,7 +73,7 @@ function rowsToCostumes(rows) {
 let ALL_COSTUMES = [];
 let VISIBLE_LIST = [];
 let renderedCount = 0;
-let activeCategory = "Всі";
+let activeCategories = new Set(); // порожньо = "Всі"
 let searchQuery = "";
 let stash = loadStash();
 
@@ -90,6 +90,7 @@ const stashPanel = document.getElementById("stash-panel");
 const stashList = document.getElementById("stash-list");
 
 const CATEGORIES = [
+  "Дорослі", "Дитячі",
   "Жіночі", "Чоловічі", "Новорічні", "Геловін", "Весняні", "Осінні",
   "Звірята", "Українські", "Національності", "Професії", "Вечірні", "Аксесуари", "Персонажі"
 ];
@@ -129,11 +130,29 @@ function buildCategoryNav() {
   ).join("");
   categoryNav.querySelectorAll(".category-pill").forEach(btn => {
     btn.addEventListener("click", () => {
-      activeCategory = btn.dataset.cat;
-      categoryNav.querySelectorAll(".category-pill").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+      const cat = btn.dataset.cat;
+      if (cat === "Всі") {
+        activeCategories.clear();
+      } else {
+        if (activeCategories.has(cat)) activeCategories.delete(cat);
+        else activeCategories.add(cat);
+      }
+      updateCategoryPillsUI();
       applyFilters();
     });
+  });
+}
+
+function updateCategoryPillsUI() {
+  const allPill = categoryNav.querySelector('.category-pill[data-cat="Всі"]');
+  const showAll = activeCategories.size === 0;
+  categoryNav.querySelectorAll(".category-pill").forEach(btn => {
+    const cat = btn.dataset.cat;
+    if (cat === "Всі") {
+      btn.classList.toggle("active", showAll);
+    } else {
+      btn.classList.toggle("active", activeCategories.has(cat));
+    }
   });
 }
 
@@ -148,7 +167,8 @@ function setupSearch() {
 // ======================= FILTER + RENDER =======================
 function applyFilters() {
   VISIBLE_LIST = ALL_COSTUMES.filter(c => {
-    const matchesCategory = activeCategory === "Всі" || c.categories.includes(activeCategory);
+    const matchesCategory = activeCategories.size === 0 ||
+      Array.from(activeCategories).every(cat => c.categories.includes(cat));
     const matchesSearch = !searchQuery || c.searchBlob.includes(searchQuery);
     return matchesCategory && matchesSearch;
   });
